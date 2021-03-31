@@ -194,12 +194,12 @@
     </b-form>
 
     <div class="d-none" id="emailTemplate">
-      Type of change:{{ form.typeofchange }} \n Date of occurance:
-      {{ form.date }} \n Time of occurance: {{ form.time }} \n Program:
-      {{ form.program }} \n Has your manager approved this change:
-      {{ form.managerApproval }} \n Person we can contact: {{ form.contact }} \n
-      Affected User: {{ form.affected }} \n Issue Description: \n
-      {{ form.issue }} \n \n \n Expected Result: \n
+      Type of change:{{ form.typeofchange }} %0d; Date of occurance:
+      {{ form.date }} %0d; Time of occurance: {{ form.time }} %0d; Program:
+      {{ form.program }} %0d; Has your manager approved this change:
+      {{ form.managerApproval }} %0d; Person we can contact:
+      {{ form.contact }} %0d; Affected User: {{ form.affected }} %0d; Issue
+      Description: %0d; {{ form.issue }} %0d; %0d; %0d; Expected Result: %0d;
       {{ form.expected }}
     </div>
   </div>
@@ -251,7 +251,24 @@ export default {
         this.form.title +
         " - SmartSimple Incident Report&" +
         "body=" +
-        encodeURIComponent(document.getElementById("emailTemplate").innerHTML);
+        "Type of change: " +
+        this.form.typeofchange +
+        "%0d Date of occurance: " +
+        this.form.date +
+        "%0d Time of occurance: " +
+        this.form.time +
+        "%0d Program: " +
+        this.form.program +
+        "%0d Has your manager approved this change: " +
+        this.form.managerApproval +
+        "%0d Person we can contact: " +
+        this.form.contact +
+        "%0d Affected User: " +
+        this.form.affected +
+        "%0d Issue Description: %0d" +
+        this.form.issue +
+        "%0d %0d %0d Expected Result: %0d " +
+        this.form.expected;
     },
   },
 };
