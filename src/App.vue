@@ -225,7 +225,7 @@
 export default {
   data() {
     return {
-      name: "main-form",
+      name: "main-page",
       form: {
         title: "",
         name: "",
