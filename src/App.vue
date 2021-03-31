@@ -1,7 +1,38 @@
 <template>
   <div>
-    <h1>Toronto Public Health - SmartSimple Incident Report Form</h1>
-    <b-form @submit="onSubmit">
+    <b-navbar
+      toggleable="lg"
+      type="dark"
+      variant="info"
+      style="background: #28333a !important"
+    >
+      <b-navbar-brand href="#"
+        ><img
+          style="width: 6em"
+          src="https://www.toronto.ca/wp-content/themes/cot/img/logo.svg"
+      /></b-navbar-brand>
+
+      <!-- <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item href="#">Link</b-nav-item>
+          <b-nav-item href="#" disabled>Smart Simple </b-nav-item>
+        </b-navbar-nav>
+ 
+      </b-collapse> -->
+    </b-navbar>
+
+    <b-form @submit="onSubmit" class="p-4">
+      <h1 class="mt-4">TPH - SmartSimple Incident Report Form</h1>
+      <p class="text-muted">
+        This form will help pre-populate an email to the TPH SmartSimple IT
+        support staff. <br />
+        <span class="text-danger"
+          >Please note that only emails sent using the format prepared by this
+          form will be accepted.</span
+        >
+      </p>
       <div class="row">
         <b-form-group
           label="Summary/Title:"
@@ -104,6 +135,7 @@
             v-model="form.contact"
             placeholder="firstname.lastname@toronto.ca"
             required
+            type="email"
           ></b-form-input>
         </b-form-group>
         <b-form-group
@@ -115,44 +147,85 @@
             id="input-affected"
             v-model="form.affected"
             placeholder="firstname.lastname@toronto.ca"
-            required
+            type="email"
           ></b-form-input>
         </b-form-group>
+
+        <b-form-group
+          label="Issue Description:"
+          label-for="textarea-issue"
+          class="col-lg-6"
+        >
+          <b-form-textarea
+            id="textarea-issue"
+            rows="3"
+            max-rows="8"
+            v-model="form.issue"
+          ></b-form-textarea>
+          <p class="text-muted">
+            Where in the flow was this issue encountered? <br />
+            Please give Clear step by step directions from the login screen.
+          </p>
+        </b-form-group>
+
+        <b-form-group
+          label="Expected Results:"
+          label-for="textarea-Expected"
+          class="col-lg-6"
+          v-model="form.expected"
+        >
+          <b-form-textarea
+            id="textarea-Expected"
+            rows="3"
+            max-rows="8"
+            v-model="form.expected"
+          ></b-form-textarea>
+          <p class="text-muted">
+            Please describe in as much detail as possible.
+          </p>
+        </b-form-group>
       </div>
-
-      <!-- 
-
-Issue Description:
-
-Screen print:
-Where in the flow the issue was encountered:  
-Please give directions from the login screen.
-Clear step by step. 
-Screenshots & video links are encouraged to help facilitate better communication
-
-Note: sometimes contact person is not the actual person ( i.e Herb can raise the issue but it’s really someone else’s .. ) 
-
-
-Expected Result:
-Screenshots & video links are encouraged to help facilitate better communication -->
-      <div class="alert alert-warning">Please geat</div>
+      <div class="alert alert-warning">
+        Screenshots & video links are encouraged to help facilitate better
+        communication, you may include these in the email.
+      </div>
       <b-button type="reset" variant="secondary" class="mr-3">Reset</b-button>
-      <b-button type="submit" variant="success">Start Ticket</b-button>
+      <b-button type="submit" variant="success">Prefill my Email</b-button>
     </b-form>
+
+    <div class="d-none" id="emailTemplate">
+      Type of change:{{ form.typeofchange }}
+
+      Date of occurance: {{ form.date }}
+
+      Time of occurance: {{ form.time }}
+
+      Program: {{ form.program }}
+
+      Has your manager approved this change: {{ form.managerApproval }}
+
+      Person we can contact: {{ form.contact }}
+
+      Affected User: {{ form.affected }}
+
+      Issue Description:
+      {{ form.issue }}
+
+      Expected Result:
+      {{ form.expected }}
+    </div>
   </div>
 </template>
 
 <style>
-body {
-  padding: 1rem;
-}
+/* body {} */
 </style>
 
 <script>
 export default {
   data() {
     return {
-      name: "BootstrapVue",
+      name: "SmartSimple incident Reporting",
       form: {
         title: "",
         name: "",
@@ -161,7 +234,10 @@ export default {
         time: "",
         contact: "",
         affected: "",
+        typeofchange: "",
         managerApproval: "",
+        issue: "",
+        expected: "",
       },
       programs: [
         { value: "TUHF", text: "TUHF" },
@@ -178,19 +254,16 @@ export default {
       ],
     };
   },
-  watch: {
-    show(newVal) {
-      console.log(`Alert is now ${newVal ? "visible" : "hidden"}`);
-    },
-  },
   methods: {
     onSubmit() {
       console.log("Toggle button clicked");
       window.location.href =
-        "mailto:tphsmartsimple@toronto.ca?bcc=subhas.fagu@toronto.ca, andreea.gray@toronto.ca&"+
-        "subject=SmartSimple Incident Report&"+
-        "body="+
-        "Hi%20Bob,%0d%0dI%20would%20like%20to%20RSVP%20to%20your%20party%20invitation.%20Here%20are%20my%20details:%0d%0dName:%20Eryka%20Adams%0dNumber%20of%20Guest:%0d";
+        "mailto:tphsmartsimple@toronto.ca?" +
+        "subject=" +
+        this.form.title +
+        " - SmartSimple Incident Report&" +
+        "body=" +
+        encodeURIComponent(document.getElementById("emailTemplate").innerHTML);
     },
   },
 };
