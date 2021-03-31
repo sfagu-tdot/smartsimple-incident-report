@@ -194,24 +194,12 @@
     </b-form>
 
     <div class="d-none" id="emailTemplate">
-      Type of change:{{ form.typeofchange }}
-
-      Date of occurance: {{ form.date }}
-
-      Time of occurance: {{ form.time }}
-
-      Program: {{ form.program }}
-
-      Has your manager approved this change: {{ form.managerApproval }}
-
-      Person we can contact: {{ form.contact }}
-
-      Affected User: {{ form.affected }}
-
-      Issue Description:
-      {{ form.issue }}
-
-      Expected Result:
+      Type of change:{{ form.typeofchange }} \n Date of occurance:
+      {{ form.date }} \n Time of occurance: {{ form.time }} \n Program:
+      {{ form.program }} \n Has your manager approved this change:
+      {{ form.managerApproval }} \n Person we can contact: {{ form.contact }} \n
+      Affected User: {{ form.affected }} \n Issue Description: \n
+      {{ form.issue }} \n \n \n Expected Result: \n
       {{ form.expected }}
     </div>
   </div>
