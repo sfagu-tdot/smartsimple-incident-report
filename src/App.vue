@@ -225,7 +225,7 @@
 export default {
   data() {
     return {
-      name: "SmartSimple incident Reporting",
+      name: "main-form",
       form: {
         title: "",
         name: "",
