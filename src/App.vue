@@ -26,8 +26,8 @@
     <b-form @submit="onSubmit" class="p-4">
       <h1 class="mt-4">TPH - SmartSimple Incident Report Form</h1>
       <p class="text-muted">
-        This form will help pre-populate an email to the TPH SmartSimple IT
-        support staff. <br />
+        This form will help generate an email to the TPH SmartSimple IT support
+        staff. <br />
         <span class="text-danger"
           >Please note that only emails sent using the format prepared by this
           form will be accepted.</span
@@ -35,7 +35,7 @@
       </p>
       <div class="row">
         <b-form-group
-          label="Summary/Title:"
+          label="Summary/Title of incident:"
           label-for="input-title"
           class="col-lg-6"
         >
@@ -62,8 +62,8 @@
 
       <b-form-group>
         <div class="row">
-          <div class="col-6">
-            <label for="input-date">Date of occurance</label>
+          <div class="col-lg-6">
+            <label for="input-date">Date of occurance:</label>
             <b-form-datepicker
               id="input-date"
               v-model="form.date"
@@ -71,8 +71,8 @@
               required
             ></b-form-datepicker>
           </div>
-          <div class="col-6">
-            <label for="input-time">Time of occurance (optional)</label>
+          <div class="col-lg-6">
+            <label for="input-time">Time of occurance: (optional)</label>
             <b-input-group>
               <b-form-input
                 id="input-time"
@@ -97,7 +97,7 @@
 
       <div class="row">
         <b-form-group
-          label="Program:"
+          label="Select your Program:"
           label-for="radio-program"
           class="col-lg-6"
         >
@@ -110,7 +110,7 @@
         </b-form-group>
 
         <b-form-group
-          label="Has your manager approved this change:"
+          label="Has your manager approved this change?"
           label-for="radio-managerApproval"
           class="col-lg-6"
         >
@@ -164,7 +164,7 @@
           ></b-form-textarea>
           <p class="text-muted">
             Where in the flow was this issue encountered? <br />
-            Please give Clear step by step directions from the login screen.
+            Please give clear step by step instructions from the login screen.
           </p>
         </b-form-group>
 
@@ -187,10 +187,9 @@
       </div>
       <div class="alert alert-warning">
         Screenshots & video links are encouraged to help facilitate better
-        communication, you may include these in the email.
+        communication, you may include these in the email once generated.
       </div>
-      <b-button type="reset" variant="secondary" class="mr-3">Reset</b-button>
-      <b-button type="submit" variant="success">Prefill my Email</b-button>
+      <b-button type="submit" variant="success">Generate Email</b-button>
     </b-form>
 
     <div class="d-none" id="emailTemplate">
@@ -243,8 +242,9 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
-      console.log("Toggle button clicked");
+    onSubmit(event) {
+      event.preventDefault();
+
       window.location.href =
         "mailto:tphsmartsimple@toronto.ca?" +
         "subject=" +
@@ -266,9 +266,9 @@ export default {
         "%0d Affected User: " +
         this.form.affected +
         "%0d Issue Description: %0d" +
-        this.form.issue +
+        this.form.issue.replace(/(?:\r\n|\r|\n)/g, "%0d") +
         "%0d %0d %0d Expected Result: %0d " +
-        this.form.expected;
+        this.form.expected.replace(/(?:\r\n|\r|\n)/g, "%0d");
     },
   },
 };
