@@ -52,3 +52,41 @@
   ```markdown
   - **Improved**: Enhanced performance of the search functionality. 🔍
   - **Fixed**: Resolved issue with tab management. 🛠️
+  ```
+
+### Feedback and Support
+- Encourage users to report any issues they encounter.
+- Provide links to your support or issues page.
+- Example: “If you encounter any issues, please report them on the issues page. 🙏”
+### Consistency
+- Maintain a consistent format and structure across all release notes.
+- Regularly update the page to reflect the latest changes.
+- **Example**:
+```
+## Release Notes for 1.0.1-a.19 - November 10th, 2024
+
+### Introduction
+This release includes several bug fixes and new features to enhance user experience. 🎉
+
+### Breaking Changes
+- Deprecated support for legacy API endpoints. Users must update to the new API. ⚠️
+
+### Fixes
+- Resolved issue with tab management. 🛠️
+- Fixed crash on startup for certain configurations. 🚀
+
+### Features
+- Added new 'essentials' feature for managing tabs and workspaces. ✨
+- Introduced dark mode for better night-time usability. 🌙
+
+### Improvements
+- Improved native look and feel of the browser. 🖥️
+- Enhanced performance of the search functionality. 🔍
+
+### Theme Changes
+- Updated default theme to improve readability. 📚
+- Added new color schemes for better customization. 🎨
+
+### Feedback and Support
+If you encounter any issues, please report them on the issues page. 🙏
+```
